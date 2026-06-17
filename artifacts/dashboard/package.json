@@ -10,22 +10,26 @@
     "start": "node dist/server.mjs"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.0",
     "@workspace/api-client-react": "workspace:*",
+    "express": "^5.0.0-beta.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.0",
-    "@tanstack/react-query": "^5.17.0",
-    "zustand": "^4.4.7",
-    "express": "^5.0.0-beta.2"
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.5.0",
+    "esbuild": "^0.19.11",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^4.3.1",
     "typescript": "^5.3.3",
-    "vite": "^5.0.8",
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.10.6",
-    "esbuild": "^0.19.11"
+    "vite": "^5.0.8"
   }
 }
