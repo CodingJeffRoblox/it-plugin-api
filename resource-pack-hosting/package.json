@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --outDir dist server.ts",
     "start": "node dist/server.js"
   },
   "dependencies": {
