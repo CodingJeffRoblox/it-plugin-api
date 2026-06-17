@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build": "tsc",
     "typecheck": "tsc --noEmit",
     "push": "drizzle-kit push:pg",
     "generate": "drizzle-kit generate:pg"

@@ -10,10 +10,9 @@ services:
     plan: free
     rootDir: .
     buildCommand: >-
-      npm install -g pnpm &&
-      pnpm install --frozen-lockfile &&
-      pnpm run typecheck:libs &&
-      pnpm --filter @workspace/api-server run build
+      npx pnpm@latest install --frozen-lockfile &&
+      npx pnpm@latest --filter './lib/*' run build &&
+      npx pnpm@latest --filter @workspace/api-server run build
     startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
     healthCheckPath: /api/healthz
     envVars:
@@ -31,10 +30,9 @@ services:
     plan: free
     rootDir: .
     buildCommand: >-
-      npm install -g pnpm &&
-      pnpm install --frozen-lockfile &&
-      pnpm run typecheck:libs &&
-      BASE_PATH=/ pnpm --filter @workspace/dashboard run build
+      npx pnpm@latest install --frozen-lockfile &&
+      npx pnpm@latest --filter './lib/*' run build &&
+      BASE_PATH=/ npx pnpm@latest --filter @workspace/dashboard run build
     startCommand: node artifacts/dashboard/dist/server.js
     envVars:
       - key: BASE_PATH
@@ -49,7 +47,6 @@ services:
     plan: free
     rootDir: resource-pack-hosting
     buildCommand: >-
-      npm install -g pnpm &&
-      pnpm install --frozen-lockfile &&
-      pnpm --filter @workspace/resource-pack-hosting run build
+      npx pnpm@latest install --frozen-lockfile &&
+      npx pnpm@latest --filter @workspace/resource-pack-hosting run build
     startCommand: node dist/server.js
