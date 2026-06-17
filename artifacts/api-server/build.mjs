@@ -10,7 +10,7 @@ await esbuild.build({
   target: 'node20',
   format: 'esm',
   outdir: 'dist',
-  external: ['pg'],
+  external: ['pg', '@workspace/db'],
   sourcemap: true,
   logLevel: 'info',
 });
