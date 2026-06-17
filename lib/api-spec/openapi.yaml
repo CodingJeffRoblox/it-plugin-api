@@ -1,0 +1,218 @@
+openapi: 3.0.3
+info:
+  title: ITPlugin API
+  version: 1.0.0
+  description: Minecraft server monitoring API
+servers:
+  - url: https://itplugin-api.onrender.com
+paths:
+  /api/healthz:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    enum: [ok]
+  /api/auth/verify:
+    post:
+      summary: Verify API key
+      operationId: verifyApiKey
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - apiKey
+              properties:
+                apiKey:
+                  type: string
+      responses:
+        '200':
+          description: Verification result
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                  role:
+                    type: string
+                    enum: [admin, staff]
+  /api/events:
+    post:
+      summary: Receive plugin webhook event
+      operationId: createEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+                - serverName
+                - payload
+              properties:
+                type:
+                  type: string
+                  enum: [TICKET_CREATE, TICKET_CLOSE, TICKET_ASSIGN, CONSOLE_ERROR, BROADCAST, JOIN]
+                serverName:
+                  type: string
+                apiKey:
+                  type: string
+                payload:
+                  type: object
+                  additionalProperties: true
+    get:
+      summary: List events
+      operationId: listEvents
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+  /api/dashboard/summary:
+    get:
+      summary: Dashboard summary stats
+      operationId: getDashboardSummary
+      responses:
+        '200':
+          description: Summary statistics
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  openTickets:
+                    type: integer
+                  errors:
+                    type: integer
+                  totalEvents:
+                    type: integer
+  /api/dashboard/tickets:
+    get:
+      summary: Get tickets from events
+      operationId: getDashboardTickets
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [open, closed, all]
+      responses:
+        '200':
+          description: List of tickets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ticket'
+  /api/dashboard/errors:
+    get:
+      summary: Get console errors
+      operationId: getDashboardErrors
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of errors
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+  /api/dashboard/activity:
+    get:
+      summary: Get all events in reverse chronological order
+      operationId: getDashboardActivity
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        serverName:
+          type: string
+        payload:
+          type: object
+          additionalProperties: true
+        createdAt:
+          type: string
+          format: date-time
+    Ticket:
+      type: object
+      properties:
+        ticketId:
+          type: string
+        playerName:
+          type: string
+        category:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [open, closed]
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        stackTrace:
+          type: string
+        createdAt:
+          type: string
+          format: date-time

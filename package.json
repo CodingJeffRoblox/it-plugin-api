@@ -1,0 +1,17 @@
+{
+  "name": "itplugin-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "typecheck:libs": "pnpm --filter './lib/*' run typecheck",
+    "build": "pnpm --filter './artifacts/*' run build",
+    "dev": "pnpm --filter './artifacts/*' --parallel run dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/node": "^20.10.6"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

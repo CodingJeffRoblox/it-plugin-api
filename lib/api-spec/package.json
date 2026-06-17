@@ -1,0 +1,8 @@
+{
+  "name": "@workspace/api-spec",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "typecheck": "echo 'No TypeScript to check in api-spec'"
+  }
+}
