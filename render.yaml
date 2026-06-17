@@ -9,6 +9,7 @@ services:
     runtime: node
     plan: free
     rootDir: .
+    nodeVersion: 20
     buildCommand: >-
       npx pnpm@latest install --frozen-lockfile &&
       npx pnpm@latest --filter './lib/*' run build &&
@@ -29,11 +30,12 @@ services:
     runtime: node
     plan: free
     rootDir: .
+    nodeVersion: 20
     buildCommand: >-
       npx pnpm@latest install --frozen-lockfile &&
       npx pnpm@latest --filter './lib/*' run build &&
       BASE_PATH=/ npx pnpm@latest --filter @workspace/dashboard run build
-    startCommand: node artifacts/dashboard/dist/server.js
+    startCommand: node artifacts/dashboard/dist/server.mjs
     envVars:
       - key: BASE_PATH
         value: /
@@ -46,6 +48,7 @@ services:
     runtime: node
     plan: free
     rootDir: resource-pack-hosting
+    nodeVersion: 20
     buildCommand: >-
       npx pnpm@latest install --frozen-lockfile &&
       npx pnpm@latest --filter @workspace/resource-pack-hosting run build
