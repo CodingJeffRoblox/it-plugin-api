@@ -63,6 +63,9 @@ importers:
       '@workspace/api-client-react':
         specifier: workspace:*
         version: link:../../lib/api-client-react
+      express:
+        specifier: ^5.0.0-beta.2
+        version: 5.2.1
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -76,6 +79,12 @@ importers:
         specifier: ^4.4.7
         version: 4.5.7(@types/react@18.3.31)(react@18.3.1)
     devDependencies:
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.25
+      '@types/node':
+        specifier: ^20.10.6
+        version: 20.19.43
       '@types/react':
         specifier: ^18.2.46
         version: 18.3.31
@@ -138,6 +147,22 @@ importers:
       drizzle-kit:
         specifier: ^0.20.9
         version: 0.20.18
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  resource-pack-hosting:
+    dependencies:
+      express:
+        specifier: ^5.0.0-beta.2
+        version: 5.2.1
+    devDependencies:
+      '@types/express':
+        specifier: ^4.17.21
+        version: 4.17.25
+      '@types/node':
+        specifier: ^20.10.6
+        version: 20.19.43
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
