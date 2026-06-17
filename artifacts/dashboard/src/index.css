@@ -1,3 +1,311 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* =========================
+   ROOT VARIABLES
+========================= */
+:root {
+  --bg: #0f172a;
+  --panel: #111c33;
+  --card: rgba(255, 255, 255, 0.06);
+  --card-hover: rgba(255, 255, 255, 0.1);
+
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+
+  --border: rgba(255, 255, 255, 0.08);
+
+  --radius: 14px;
+  --radius-sm: 10px;
+
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #1e293b, var(--bg));
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================
+   LAYOUT
+========================= */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+.sidebar {
+  width: 260px;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(12px);
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar h1 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: var(--muted);
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  transition: 0.2s ease;
+}
+
+.nav a:hover {
+  background: var(--card);
+  color: var(--text);
+}
+
+.nav a.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+.main {
+  flex: 1;
+  padding: 24px;
+}
+
+/* =========================
+   TOPBAR
+========================= */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.topbar h2 {
+  font-size: 22px;
+}
+
+.search {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  outline: none;
+  width: 260px;
+}
+
+/* =========================
+   GRID CARDS
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  background: var(--card-hover);
+}
+
+.card h3 {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.card .value {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  background: var(--card);
+}
+
+/* =========================
+   TABLE
+========================= */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
+.table th,
+.table td {
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.table th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  border-bottom: 1px solid var(--border);
+}
+
+.table tr:hover {
+  background: var(--card);
+}
+
+/* =========================
+   STATUS BADGES
+========================= */
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge.success {
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--success);
+}
+
+.badge.warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+}
+
+.badge.danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+/* =========================
+   FORMS
+========================= */
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  outline: none;
+}
+
+.input:focus {
+  border-color: var(--primary);
+}
+
+/* =========================
+   MODAL
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: var(--panel);
+  padding: 20px;
+  border-radius: var(--radius);
+  width: 420px;
+  box-shadow: var(--shadow);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .search {
+    width: 160px;
+  }
+
+  .main {
+    padding: 16px;
+  }
+}
