@@ -14,7 +14,7 @@ services:
       npx pnpm@latest install --frozen-lockfile &&
       npx pnpm@latest --filter './lib/*' run build &&
       npx pnpm@latest --filter @workspace/api-server run build
-    startCommand: node --enable-source-maps artifacts/api-server/dist/index.mjs
+    startCommand: node --enable-source-maps artifacts/api-server/dist/index.js
     healthCheckPath: /api/healthz
     envVars:
       - key: NODE_ENV
